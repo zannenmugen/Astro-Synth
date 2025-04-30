@@ -28,7 +28,7 @@ A high-performance N-body gravity simulator in Python, with an optional C-accele
 ## 🏃‍♀️ Usage
 
 ```bash
-python orbit_sim [--numpy] [--resolution WIDTH HEIGHT]
+python astrosynth [--numpy] [--resolution WIDTH HEIGHT]
 ```
 
 - `--numpy` (or `-n`): Run the simulation using NumPy instead of the C backend.
