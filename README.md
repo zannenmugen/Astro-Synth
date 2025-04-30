@@ -15,8 +15,8 @@ A high-performance N-body gravity simulator in Python, with an optional C-accele
 
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/alvinng4/OrbitSim.git
-   cd OrbitSim
+   git clone https://github.com/zannenmugen/Astro-Synth.git
+   cd AstroSynth
    ```
 2. Install dependencies:
    ```bash
@@ -34,7 +34,7 @@ python orbit_sim [--numpy] [--resolution WIDTH HEIGHT]
 - `--numpy` (or `-n`): Run the simulation using NumPy instead of the C backend.
 - `--resolution` (or `-r`): Override the default window size:
   ```bash
-  python orbit_sim --resolution 1280 720
+  python astrosynth --resolution 1280 720
   ```
 
 ---
