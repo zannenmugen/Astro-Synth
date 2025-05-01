@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 # Import your headless simulation function
-from astrosynth.core import simulate
+from astrosynth import simulate
 
 app = FastAPI(
     title="AstroSynth API",
