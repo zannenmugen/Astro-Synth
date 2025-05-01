@@ -1,33 +1,25 @@
 # web_api.py
+import io
 from fastapi import FastAPI, Query
 from fastapi.responses import JSONResponse
-from astrosynth.simulator import Simulator
-from astrosynth.grav_obj import Grav_obj
+# or FileResponse if you want to return images/snapshots
+from astrosynth import simulate  # import your main simulation function
 
 app = FastAPI()
 
-def simulate(system: str, steps: int, dt: float):
-    # 1. Make a dummy GravitySimulator and populate it:
-    from astrosynth.__main__ import GravitySimulator
-    grav_sim = GravitySimulator()
-    
-    # 2. Clear any pre-existing objects and create the requested preset:
-    grav_sim.grav_objs.empty()
-    getattr(Grav_obj, f"create_{'solor_system' if system=='solar_system' else system}")(grav_sim)
-    grav_sim.stats.reset(grav_sim)
-    
-    # 3. Run the integrator for `steps` timesteps of size dt:
-    sim = Simulator(grav_sim)
-    for _ in range(steps):
-        sim.run_simulation(grav_sim)
-    
-    # 4. Extract state arrays:
-    positions = sim.x.tolist()
-    velocities = sim.v.tolist()
-    return {"positions": positions, "velocities": velocities}
-
 @app.get("/simulate")
-async def run_sim(system: str = Query("solar_system"), 
-                  steps: int = Query(1000), 
-                  dt: float = Query(0.01)):
-    return JSONResponse(content=simulate(system, steps, dt))
+def run_simulation(
+    system: str = Query("solar_system", description="Which preset system to load"),
+    steps: int = Query(1000, ge=1, le=100000, description="Number of timesteps"),
+    dt: float = Query(0.01, gt=0, description="Timestep size")
+):
+    """
+    Run the simulation and return final positions and velocities as JSON.
+    """
+    result = simulate(system=system, steps=steps, dt=dt)
+    # assume simulate() returns a dict or serializable structure
+    return JSONResponse(content=result)
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
