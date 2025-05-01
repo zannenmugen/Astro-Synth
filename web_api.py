@@ -3,7 +3,7 @@ import io
 from fastapi import FastAPI, Query
 from fastapi.responses import JSONResponse
 # or FileResponse if you want to return images/snapshots
-from astrosynth import simulate  # import your main simulation function
+from astrosynth import Simulator  # import your main simulation function
 
 app = FastAPI()
 
@@ -16,7 +16,7 @@ def run_simulation(
     """
     Run the simulation and return final positions and velocities as JSON.
     """
-    result = simulate(system=system, steps=steps, dt=dt)
+    result = Simulator(system=system, steps=steps, dt=dt)
     # assume simulate() returns a dict or serializable structure
     return JSONResponse(content=result)
 
