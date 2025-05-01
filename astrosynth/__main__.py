@@ -11,6 +11,7 @@ environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
 import pygame
 
+from core import simulate
 from camera import Camera
 from grav_obj import Grav_obj
 from menu import Menu
