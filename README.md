@@ -1,4 +1,5 @@
 # Astro-Synth
+![Screenshot (174)](https://github.com/user-attachments/assets/155b28b6-a6b3-4bee-b310-35b879d37724)
 
 A high-performance N-body gravity simulator in Python, with an optional C-accelerated core for real-time visualization of planetary and custom star systems.
 
